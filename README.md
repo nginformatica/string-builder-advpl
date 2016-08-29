@@ -1,4 +1,5 @@
 ## AdvPL StringBuilder
+<img src="https://img.shields.io/badge/language-advpl-green.svg" />
 
 This is an implementation of string concatenation for AdvPL based on *virtual pointers* and on an internal research.
 
