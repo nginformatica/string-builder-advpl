@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>AdvPL StringBuilder by nginformatica</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>AdvPL StringBuilder</h1>
+        <h2>An optimized way to concat strings with O(1) complexity in AdvPL</h2>
+        <a href="https://github.com/nginformatica/string-builder-advpl" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h2>
+<a id="advpl-stringbuilder" class="anchor" href="#advpl-stringbuilder" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>AdvPL StringBuilder</h2>
+
+<p><img src="https://img.shields.io/badge/language-advpl-green.svg"></p>
+
+<p>This is an implementation of string concatenation for AdvPL based on <em>virtual pointers</em> and on an internal research.</p>
+
+<p>Basically, in AdvPL, every string is immutable. When you do <code>+</code>, you have a <code>O(n ^ 2)</code> complexity, which is <strong>very</strong> expensive. Our implementation reduces it to <code>O(1)</code>, preallocating and reading directly from the memory, without any dependency on <code>+</code>. In our tests, we've got to run 240 times faster than in the classic model. Its use is recommended only for large string concatenation operation. <code>+</code> is faster for small strings.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Just copy and compile the file <code>StringBuilder.prw</code> under <code>./src</code>.</p>
+
+<h2>
+<a id="interface" class="anchor" href="#interface" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Interface</h2>
+
+<div class="highlight highlight-source-harbour"><pre>Class StringBuilder
+  Method <span class="pl-en">New</span>( <span class="pl-v">cInit</span> ) Constructor
+  Method <span class="pl-en">Append</span>( <span class="pl-v">cBuffer</span> )
+  Method <span class="pl-en">Build</span>()
+  Method <span class="pl-en">Read</span>()
+  Method <span class="pl-en">Dispose</span>()
+EndClass</pre></div>
+
+<h2>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h2>
+
+<div class="highlight highlight-source-harbour"><pre>Function TestStr
+  Local <span class="pl-v">nI</span>
+  Local <span class="pl-v">oBuilder</span> <span class="pl-k">:=</span> <span class="pl-en">StringBuilder</span>():<span class="pl-en">New</span>( 'optional initializer' )
+  <span class="pl-v">oBuilder</span>:<span class="pl-en">Append</span>( '...' )
+
+  For <span class="pl-v">nI</span> <span class="pl-k">:=</span> <span class="pl-c1">1</span> To <span class="pl-c1">100000</span>
+    <span class="pl-v">oBuilder</span>:<span class="pl-en">Append</span>( <span class="pl-en">AllTrim</span>( <span class="pl-en">Str</span>( <span class="pl-v">nI</span> ) ) )
+  Next <span class="pl-v">nI</span>
+
+  <span class="pl-en">ConOut</span>( <span class="pl-v">oBuilder</span>:<span class="pl-en">Read</span>() ) <span class="pl-c">// "optional initializer... 123456789101112" and so on...</span>
+  <span class="pl-v">oBuilder</span>:<span class="pl-en">Dispose</span>() <span class="pl-c">// Clear garbage from memory. Manual GC</span></pre></div>
+
+<h2>
+<a id="maintainers" class="anchor" href="#maintainers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Maintainers</h2>
+
+<p>This project is maintained and developed by <a href="http://ngi.com.br">NG Informática</a> ─ TOTVS Software Partner</p>
+
+<div align="center">
+   <div>
+      <img src="https://avatars1.githubusercontent.com/u/21263692?v=3&amp;s=200">
+   </div>
+   <div>
+      <img src="http://www.escriba.com.br/wp-content/uploads/2014/10/totvs.png" width="100">
+   </div>
+</div>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/nginformatica/string-builder-advpl/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/nginformatica/string-builder-advpl/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/nginformatica/string-builder-advpl"></a> is maintained by <a href="https://github.com/nginformatica">nginformatica</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
